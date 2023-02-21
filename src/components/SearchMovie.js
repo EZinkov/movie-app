@@ -1,24 +1,24 @@
 import React, { useState } from "react"
 import { AiOutlineSearch } from "react-icons/ai"
-
-import MovieList from "./MovieList"
-
-const SearchMovie = ({ onAddToWatchlist }) => {
+const SearchMovie = ({ movies, setMovies }) => {
   const [userInput, setUserInput] = useState("")
-  const [movies, setMovies] = useState([])
+
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
   const handleSubmit = e => {
     e.preventDefault()
+
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=0f19051df188c07b20be219ebcc7836f&language=en-US&page=1&query=${userInput}`
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${userInput}`
     )
       .then(res => res.json())
       .then(data => setMovies(data.results))
+
+    setUserInput("")
   }
 
   return (
     <div>
-      {/* <div>Scrollbar images</div> */}
       <form onSubmit={handleSubmit} className="mt-8">
         <label
           htmlFor="default-search"
@@ -48,7 +48,6 @@ const SearchMovie = ({ onAddToWatchlist }) => {
           </button>
         </div>
       </form>
-      <MovieList movies={movies} />
     </div>
   )
 }
