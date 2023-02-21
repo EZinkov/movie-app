@@ -1,25 +1,26 @@
 import React from "react"
+import { Link } from "react-router-dom"
+import { AiFillStar } from "react-icons/ai"
 
 const MovieCard = ({ movie }) => {
-  const { title, poster_path, overview } = movie
-  const imageUrl = `https://image.tmdb.org/t/p/w342/${poster_path}`
+  const imageUrl = `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
 
   return (
-    <div className="flex h-[300px] flex-grow-1 w-1/3 px-4 mt-4">
-      <img
-        className="object-fit border rounded-md mr-2"
-        src={imageUrl}
-        alt={title}
-      />
-      <div className="">
-        <h2 className="text-md font-bold">{title}</h2>
-        <p className="text-sm">{overview}</p>
-        <button className=" px-6 py-2 bg-red-500 rounded-full">Trailer</button>
-        <button className=" px-6 py-2 bg-red-500 rounded-full">
-          Add to Watchlist
-        </button>
+    <Link to={`/movie/${movie.id}`}>
+      <div className="p-4">
+        <div className="w-64 h-[460px] overflow-scroll bg-slate-200 p-2 rounded-md mt-4">
+          <img className="rounded-md" src={imageUrl} alt={movie.title} />
+          <h2 className="text-sm font-bold">{movie.title}</h2>
+          <div className="flex justify-between mt-2">
+            <p className="text-sm">{movie.release_date.slice(0, 4)}</p>
+            <div className="flex">
+              <AiFillStar className="text-yellow-400" />
+              <p className="text-xs ml-2">{movie.vote_average}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
