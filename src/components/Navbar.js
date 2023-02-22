@@ -1,9 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import Home from "../pages/Home"
-import Wathlist from "../pages/Watchlist"
-
 const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4 px-6">
@@ -15,12 +12,12 @@ const Navbar = () => {
       <div>
         <ul className="flex gap-6">
           <li>
-            <Link className="nav__link" to="/">
+            <Link className="text-white" to="/">
               Home
             </Link>
           </li>
           <li>
-            <Link className="nav__link" to="/watchlist">
+            <Link className="text-white" to="/watchlist">
               Watchlist
             </Link>
           </li>
