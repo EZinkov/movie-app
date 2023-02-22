@@ -1,6 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
+import { GlobalContext } from "../context/GlobalState"
 
 const Detail = ({ movieDetail }) => {
+  const { addMovieToWatchlist, watchlist } = useContext(GlobalContext)
+
+  let storedMovie = watchlist.find(o => o.id === movieDetail.id)
+
+  const watchlistDisabled = storedMovie ? true : false
+
   const {
     overview,
     release_date,
@@ -46,7 +53,11 @@ const Detail = ({ movieDetail }) => {
           {overview}
         </p>
         <div className="text-center mt-4 lg:w-2/4">
-          <button className="py-4 px-8 w-full rounded-xl bg-slate-400">
+          <button
+            disabled={watchlistDisabled}
+            onClick={() => addMovieToWatchlist(movieDetail)}
+            className="py-4 px-8 w-full rounded-xl bg-slate-400"
+          >
             Add to watchlist
           </button>
         </div>
