@@ -1,9 +1,22 @@
-import React, { useState } from "react"
+import React, { useContext } from "react"
+import MovieCard from "../components/MovieCard"
+import { GlobalContext } from "../context/GlobalState"
 
 const Watchlist = () => {
+  const { watchlist } = useContext(GlobalContext)
   return (
     <div>
-      <h1>My Watchlist</h1>
+      {watchlist.length > 0 ? (
+        <div className="flex flex-wrap">
+          {watchlist.map(movie => (
+            <div key={movie.id}>
+              <MovieCard movie={movie} type={"watchlist"} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <h1>Empty</h1>
+      )}
     </div>
   )
 }
