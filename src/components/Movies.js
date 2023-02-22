@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import MovieCard from "./MovieCard"
+import { MoviesContext } from "../context/MoviesContext"
 
-const Movies = ({ movies, setMovies }) => {
+const Movies = () => {
+  const { movies } = useContext(MoviesContext)
   return (
     <div>
       {movies.length > 0 && (
