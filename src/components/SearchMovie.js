@@ -1,7 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { AiOutlineSearch } from "react-icons/ai"
-const SearchMovie = ({ movies, setMovies }) => {
-  const [userInput, setUserInput] = useState("")
+import { MoviesContext } from "../context/MoviesContext"
+
+const SearchMovie = () => {
+  const [query, setQuery] = useState("")
+
+  const { setMovies } = useContext(MoviesContext)
 
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
@@ -9,12 +13,11 @@ const SearchMovie = ({ movies, setMovies }) => {
     e.preventDefault()
 
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${userInput}`
+      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&page=1&query=${query}`
     )
       .then(res => res.json())
       .then(data => setMovies(data.results))
-
-    setUserInput("")
+    setQuery("")
   }
 
   return (
@@ -36,9 +39,9 @@ const SearchMovie = ({ movies, setMovies }) => {
             className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search movie"
             required
-            name="userInput"
-            value={userInput}
-            onChange={e => setUserInput(e.target.value)}
+            name="query"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
           />
           <button
             type="submit"
