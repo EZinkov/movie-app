@@ -2,7 +2,7 @@
 # Movie Watchlist
 
 This Movie Watchlist project is built using React, React Router, TailwindCSS and hooks like useEffect, useState, and useContext. The project fetches data from an external API and allows the user to add movies to their watchlist.
-#### https://ez-movie-watchlist.netlify.app/
+#### [Live site](https://ez-movie-watchlist.netlify.app/)
 
 
 
